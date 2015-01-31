@@ -12,7 +12,7 @@
 #' @author Jeff Allen \email{jeff@@trestletech.com}
 #' @export
 renderHtable <- function(expr, env = parent.frame(), 
-                        quoted = FALSE){
+                        quoted = FALSE, fullRender=TRUE){
   func <- exprToFunction(expr, env, quoted)
   
   function(shinysession, name, ...) {
@@ -30,7 +30,7 @@ renderHtable <- function(expr, env = parent.frame(),
       }
     }
     
-    if (is.null(shinysession$clientData[[paste("output_",name,"_init", sep="")]])){
+    if (is.null(shinysession$clientData[[paste("output_",name,"_init", sep="")]]) || fullRender){
       # Must be initializing, send whole table.
       
       .oldTables[[shinysession$token]][[name]] <- data

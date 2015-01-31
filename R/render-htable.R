@@ -12,7 +12,8 @@
 #' @author Jeff Allen \email{jeff@@trestletech.com}
 #' @export
 renderHtable <- function(expr, env = parent.frame(), 
-                        quoted = FALSE, fullRender=TRUE){
+                        quoted = FALSE, fullRender=TRUE,
+                        colWidths = null){
   func <- exprToFunction(expr, env, quoted)
   
   function(shinysession, name, ...) {
@@ -36,6 +37,16 @@ renderHtable <- function(expr, env = parent.frame(),
       .oldTables[[shinysession$token]][[name]] <- data
       
       types <- getHtableTypes(data)
+
+      if(!is.null(colWidths)) {
+        return(list(
+          data = data,
+          types = types,
+          headers = colnames(data),
+          rownames = rownames(data),
+          cycle = .cycleCount[[shinysession$token]][[name]]
+        ))
+      }
       
       return(list(
         data = data,

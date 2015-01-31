@@ -13,7 +13,7 @@
 #' @export
 renderHtable <- function(expr, env = parent.frame(), 
                         quoted = FALSE, fullRender=TRUE,
-                        colWidths = null){
+                        colWidths = NULL){
   func <- exprToFunction(expr, env, quoted)
   
   function(shinysession, name, ...) {

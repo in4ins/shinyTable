@@ -120,6 +120,10 @@ $.extend(shinyTableOutputBinding, {
     } else if (rowMode == 'provided' && htable.rownames){
       settings.rowHeaders = htable.rownames;
     }
+
+    if (htable.colWidths) {
+      settings.colWidths = htable.colWidths;
+    }
   
     tbl.updateSettings(settings)
     

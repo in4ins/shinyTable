@@ -43,6 +43,7 @@ renderHtable <- function(expr, env = parent.frame(),
           data = data,
           types = types,
           headers = colnames(data),
+          colWidths = colWithds,
           rownames = rownames(data),
           cycle = .cycleCount[[shinysession$token]][[name]]
         ))
